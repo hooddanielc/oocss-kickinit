@@ -1,0 +1,70 @@
+/* Reset */
+
+/* Debug */
+.border {border: 1px solid black;}
+
+/* Grid */
+.line {overflow:auto;}
+.unit {float:left;}
+.unit-right {float:right;}
+.s1of16 {width: 6.25%;}
+.s2of16 {width: 12.50%;}
+.s3of16 {width: 18.75%;}
+.s4of16 {width: 25%;}
+.s5of16 {width: 31.25%;}
+.s6of16 {width: 37.50%;}
+.s7of16 {width: 43.75%;}
+.s8of16 {width: 50%;}
+.s9of16 {width: 56.25%;}
+.s10of16 {width: 62.50%;}
+.s11of16 {width: 68.75%;}
+.s12of16 {width: 75%;}
+.s13of16 {width: 81.25%;}
+.s14of16 {width: 87.50%;}
+.s15of16 {width: 93.75%;}
+.s-auto {width:auto;}
+
+/* Position */
+.pos-a {position: absolute;}
+.pos-r {position: relative;}
+.pos-f {position: fixed;}
+.pl-max {left: 100%;}
+.pl-half {left: 50%;}
+.pt-max {top: 100%;}
+.pt-half {top: 50%;}
+
+/* Spaceing */
+.ptn,.pvn,.pan{padding-top:0px}
+.pts,.pvs,.pas{padding-top:5px}
+.ptm,.pvm,.pam{padding-top:10px}
+.ptl,.pvl,.pal{padding-top:20px}
+.prn,.phn,.pan{padding-right:0px}
+.prs,.phs,.pas{padding-right:5px}
+.prm,.phm,.pam{padding-right:10px}
+.prl,.phl,.pal{padding-right:20px}
+.pbn,.pvn,.pan{padding-bottom:0px}  
+.pbs,.pvs,.pas{padding-bottom:5px}
+.pbm,.pvm,.pam{padding-bottom:10px}
+.pbl,.pvl,.pal{padding-bottom:20px}
+.pln,.phn,.pan{padding-left:0px}
+.pls,.phs,.pas{padding-left:5px}
+.plm,.phm,.pam{padding-left:10px}
+.pll,.phl,.pal{padding-left:20px}
+.mtn,.mvn,.man{margin-top:0px}
+.mts,.mvs,.mas{margin-top:5px}
+.mtm,.mvm,.mam{margin-top:10px}
+.mtl,.mvl,.mal{margin-top:20px}
+.mrn,.mhn,.man{margin-right:0px}
+.mrs,.mhs,.mas{margin-right:5px}
+.mrm,.mhm,.mam{margin-right:10px}
+.mrl,.mhl,.mal{margin-right:20px}
+.mbn,.mvn,.man{margin-bottom:0px}  
+.mbs,.mvs,.mas{margin-bottom:5px}
+.mbm,.mvm,.mam{margin-bottom:10px}
+.mbl,.mvl,.mal{margin-bottom:20px}
+.mln,.mhn,.man{margin-left:0px}
+.mls,.mhs,.mas{margin-left:5px}
+.mlm,.mhm,.mam{margin-left:10px}
+.mll,.mhl,.mal{margin-left:20px}
+.mra,.mha{margin-right:auto}
+.mla,.mha{margin-left:auto}
