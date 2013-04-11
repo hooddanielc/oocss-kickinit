@@ -29,4 +29,21 @@
 	<div class="border">
 		Footer
 	</div>
+
+	<script type="text/javascript">
+		var tween = new %%{kick}.Tween({
+		  start: 0,
+		  end: 1,
+		  millis: 1000,
+		  cbFrame: function(x) {
+		    console.log('destination this frame is ' + x);
+		  },
+		  cbComplete: function() {
+		    console.log('animation complete');
+		  },
+		  tween: %%{kick}.Tween.easeInElastic
+		});
+		console.log(tween);
+		tween.animate();
+	</script>
 </body>
