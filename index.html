@@ -7,43 +7,76 @@
 	<script type="text/javascript" src="kick.js"></script>
 </head>
 <body>
-	<div class="border" id="header" style="background: #666">
-		Header
+	<div id="square" style="width:200px; height: 100px; background: #000; position: absolute; left:50px; top:50px; margin-left: 200px;"></div>
+	<div id="header">
+		header
 	</div>
 	<div class="border line mam pam">
 		<div class="s4of16 unit">
-			Yay
+			<img id="img" src="http://allisonnazarian.com/wp-content/uploads/2012/02/random.jpg" class="s1of16" />
 		</div>
-		<div class="s4of16 unit">
-			Yay
-		</div>
-		<div class="s4of16 unit">
-			Yay
-		</div>
-		<div class="s4of16 unit">
-			<div class="border">
-				bordino
-			</div>
+		<div class="s12of16 unit">
+			<textarea>Hello</textarea>
+			<input type="text" placeholder="text" />
+			<input type="password" placeholder="password" />
+			<input type="datetime"  placeholder="datetime"/>
+			<input type="datetime-local" placeholder="datetime-local" />
+			<input type="date"  placeholder="date"/>
+			<input type="month" placeholder="month" />
+			<input type="time"  placeholder="time"/>
+			<input type="week"  placeholder="week"/>
+			<input type="number"  placeholder="number"/>
+			<input type="email" placeholder="email" />
+			<input type="url"  placeholder="url"/>
+			<input type="search"  placeholder="search"/>
+			<input type="tel"  placeholder="tel"/>
+			<input type="color"  placeholder="color"/>
+			<select>
+				<option>option</option>
+				<option>option</option>
+				<option>option</option>
+				<option>option</option>
+				<option>option</option>
+			</select>
+
+			<fieldset>
+				<legend>F0rm</legend>
+	      <div class="control-group">
+	        <label class="control-label" for="inputEmail">Email</label>
+	        <div class="controls">
+	          <input type="text" id="inputEmail" placeholder="Email">
+	        </div>
+	      </div>
+	      <div class="control-group">
+	        <label class="control-label" for="inputPassword">Password</label>
+	        <div class="controls">
+	          <input type="password" id="inputPassword" placeholder="Password">
+	        </div>
+	      </div>
+	      <div class="control-group">
+	        <div class="controls">
+	          <label class="checkbox">
+	            <input type="checkbox"> Remember me
+	          </label>
+	          <button type="submit" class="btn">Sign in</button>
+	        </div>
+	      </div>
+	     </fieldset>
 		</div>
 	</div>
-	<div class="border">
-		Footer
+	<div id="footer">
+		footer
 	</div>
 
 	<script type="text/javascript">
-		var tween = new %%{kick}.Tween({
-		  start: 0,
-		  end: 1,
-		  millis: 1000,
-		  cbFrame: function(x) {
-		    console.log('destination this frame is ' + x);
-		  },
-		  cbComplete: function() {
-		    console.log('animation complete');
-		  },
-		  tween: %%{kick}.Tween.easeInElastic
-		});
-		console.log(tween);
-		tween.animate();
+		function go() {
+			var node = %%{kick}.dom('#square');
+			node.animate({
+				'left': '500px',
+				'top': '200px'
+			}, 3000, function() {
+				console.log('complete');
+			}, %%{kick}.Tween.easeOutQuad);
+		}
 	</script>
 </body>

@@ -39,6 +39,15 @@
     },
 
     Node: function(domEl) {
+      var readyEvents = [];
+      var _this = this;
+      domEl.onreadystatechange = function() {
+        if(domEl.readyState == 'complete') {
+          for(var i = 0; i < readyEvents; i++) {
+            readyEvents[i]();
+          }
+        } 
+      }
       this.attr = function(typeName, typeValue) {
         if(%%{kick}.type(typeValue) === 'undefined') { // return types value
           return domEl.getAttribute(typeName);
@@ -52,6 +61,15 @@
       this.off = function(evType, cb){
         return %%{kick}.removeEvent(domEl, evType, cb);
       }
+      this.ready = function(cb) {
+        if(domEl.readyState) {
+          _this.on('readystatechange', function(e) {
+            if(domEl.readyState == 'complete') cb(e);
+          });
+        } else {
+          return %%{kick}.addEvent(domEl, 'load', cb);
+        }
+      }
       this.css = function(a, b) {
         if(%%{kick}.type(a) === 'object') {
           for(var x in a) {
@@ -63,26 +81,47 @@
           domEl.style[a] = b;
         }
       }
+      this.animate = function(a, b, c, d) {
+        d = d || %%{kick}.Tween.easeOutQuad;
+        function clo(x) {
+          var u = a[x].replace(/[0-9]/g, ''); // unit px, em, %, etc.
+          var tween = new %%{kick}.Tween({
+            start: _this.css(x) == '' || %%{kick}.type(_this.css(x)) == 'undefined' ? 0 : parseInt(_this.css(x)),
+            end: parseInt(a[x]),
+            millis: b,
+            cbFrame: function(v) {
+              var o = {};
+              o[x] = v + u;
+              _this.css(o);
+            },
+            cbComplete: c,
+            tween: d
+          });
+          tween.animate();
+        }
+        for(x in a) {
+          clo(x);
+        }
+      }
     },
 
     // Tweening Class
     Tween: function(obj) {
       var start = obj.start || 0,
-        end = obj.end || 50,
+        end = obj.end || 1,
         millis = obj.millis || 1000,
         cbFrame = obj.cbFrame,
         cbComplete = obj.cbComplete
         tween = obj.tween || Tween.linear;
-
+        end -= start;
       // Private vars
       var _fps = 30;
       var _frames = Math.floor(millis / _fps);
-      console.log("This many frames is " + _frames);
 
       var _animFrames = [];
       for(var i = 1; i <= _frames; i++) {
-        // percent,elapsed time,start,end,total
-        _animFrames.push(i != _frames ? (tween((1 / _frames) * i, _fps * i, start, end, millis)) : end);
+        // percent done,elapsed time,start,end,total
+        _animFrames.push((i != _frames ? (tween((1 / _frames) * i, _fps * i, 0, end, millis)) : end) + start);
       }
       this.animate = function() {
         var count = 0;
@@ -96,7 +135,33 @@
             tick++;
           }, (1000 / _fps) * (count++));
         }
-        console.log('animate');
+      }
+    },
+
+    // Ajax class save it for later
+    ajax: function(obj) {
+      // obj.cbComplete
+      // obj.cbFail,
+      // obj.url,
+      // obj.method,
+      // obj.headers
+      // obj.contentType
+      var xhr = new XMLHttpRequest();
+      xhr.open(obj.method, obj.url);
+      xhr.onreadystatechange = xhr.onerror = function() {
+        if(xhr.readyState == 4 && xhr.response == 200) {
+          if(obj.cbComplete) obj.cbComplete(xhr);
+        } else if(xhr.readyState == 4 && xhr.response != 200) {
+          if(obj.cbFail) obj.cbFail(xhr, xhr.response);
+        }
+      }
+
+      for (var x in obj.headers) {
+        xhr.setRequestHeader(x, obj.headers[x]);
+      }
+      if (%%{kick}.type(obj.contentType) !== "undefined") {
+        obj.contentType == 'json' ? xhr.setRequestHeader('Content-Type', 'application/json'): xhr.setRequestHeader('Content-Type', obj.contentType);
+        obj.contentType == 'xml' ? xhr.setRequestHeader('Content-Type', 'application/xml?'): xhr.setRequestHeader('Content-Type', obj.contentType);
       }
     }
   };
@@ -123,3 +188,4 @@
       return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
   }
 })( window );
+var $ = %%{kick}.dom;
